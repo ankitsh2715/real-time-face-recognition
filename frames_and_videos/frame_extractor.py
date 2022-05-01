@@ -9,18 +9,14 @@ height = 160
 dim = (width, height)
 
 def frameExtractor(path_to_video_files, path_to_frames):
-    print("video files "+path_to_video_files)
-    print("frames "+path_to_frames)
-
     video_files = os.listdir(path_to_video_files)
 
     for file in video_files:
         try:
-            if os.path.splitext(file)[1] !='.mp4':
+            if os.path.splitext(file)[1] !='.h264':
                 continue
-            print('extracting frames for video {}'.format(file));
+            print('******Extracting frames for video {}******'.format(file));
             video = cv2.VideoCapture(os.path.join(path_to_video_files, file))
-            print(video)
             count = 0
             success = 1
             arr_img = []
@@ -29,7 +25,7 @@ def frameExtractor(path_to_video_files, path_to_frames):
             if not os.path.isdir(os.path.join(path_to_frames, os.path.splitext(file)[0])):
                 os.mkdir(os.path.join(path_to_frames, os.path.splitext(file)[0]))
             new_path = os.path.join(path_to_frames, os.path.splitext(file)[0])
-            print("saving to : "+new_path)
+            print("Saving to : "+new_path)
 
             print("reading frames...")
             while success:
@@ -42,15 +38,21 @@ def frameExtractor(path_to_video_files, path_to_frames):
             for i in range(len(arr_img)-1):
                 image_path = os.path.join(new_path,"%d.png" % count)
                 cv2.imwrite(image_path, arr_img[i])
+                #get original captured image
                 image_original = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
-                resized_image = cv2.resize(image_original, dim, interpolation=cv2.INTER_LINEAR)
+                #crop image
+                cropped_img = image_original[0:1080,420:1500]
+                #resize image into dimensions 160x160
+                resized_image = cv2.resize(cropped_img, dim, interpolation=cv2.INTER_LINEAR)
+                #convert image to RGB
                 image_rgb = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
+                #save image
                 cv2.imwrite(image_path, image_rgb)
 
                 count += 1
-                if count>100:
-                    print("100 frames done. Stopping!")
-                    break
+                # if count>10:
+                #     print("10 frames done. Stopping!")
+                #     break
         except:
             continue
 
