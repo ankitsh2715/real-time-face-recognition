@@ -133,6 +133,7 @@ dmypy.json
 DS_Store
 */.DS_Store
 **/.DS_Store
+./data/real_images/DS_Store
 
 #frames and folder
 frames_and_videos/frames/
