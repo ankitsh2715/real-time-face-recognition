@@ -2,7 +2,7 @@
 
 import cv2
 import os
-import random
+from pathlib import Path
 
 width = 160
 height = 160
@@ -20,6 +20,8 @@ def frameExtractor(path_to_video_files, path_to_frames):
             count = 0
             success = 1
             arr_img = []
+            filenameprefix = str(format(file)[:-5])
+            print('filenameprefix'+filenameprefix)
             
             # If such a directory doesn't exist, creates one and stores its Images
             if not os.path.isdir(os.path.join(path_to_frames, os.path.splitext(file)[0])):
@@ -36,7 +38,8 @@ def frameExtractor(path_to_video_files, path_to_frames):
             count = 0
             print("processing frames...")
             for i in range(len(arr_img)-1):
-                image_path = os.path.join(new_path,"%d.png" % count)
+                savedfile = str(filenameprefix+"_"+str(count)+".png")
+                image_path = os.path.join(new_path,savedfile)
                 cv2.imwrite(image_path, arr_img[i])
                 #get original captured image
                 image_original = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
@@ -45,7 +48,7 @@ def frameExtractor(path_to_video_files, path_to_frames):
                 #resize image into dimensions 160x160
                 resized_image = cv2.resize(cropped_img, dim, interpolation=cv2.INTER_LINEAR)
                 #convert image to RGB
-                image_rgb = cv2.cvtColor(resized_image, cv2.COLOR_BGR2RGB)
+                image_rgb = cv2.cvtColor(resized_image, cv2.COLOR_RGBA2RGB)
                 #save image
                 cv2.imwrite(image_path, image_rgb)
 
