@@ -1,11 +1,11 @@
 import os
 import shutil
 
-person = "naveen_kumar"
+person = "bharath_balaji"
 
-all_frames = "/Users/ankitsharma/Codes/real-time-face-recognition/frames_and_videos/frames/"+person
-train_path = "/Users/ankitsharma/Codes/real-time-face-recognition/data/real_images/train/"+person+"/"
-val_path = "/Users/ankitsharma/Codes/real-time-face-recognition/data/real_images/val/"+person
+all_frames = "./frames_and_videos/frames/"+person
+train_path = "./data/real_images/train/"+person+"/"
+val_path = "./data/real_images/val/"+person
 
 #get list of all photos from frames_and_videos/frames/person
 video_files = os.listdir(all_frames)
