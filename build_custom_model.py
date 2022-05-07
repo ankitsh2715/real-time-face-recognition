@@ -31,7 +31,7 @@ def build_model(num_classes):
     layer_list = list(model_ft.children())[-5:] # all final layers
     # print(f"layer_list: {layer_list}")
 
-    # Put all beginning layers in an nn.Sequential . model_ft is now a torch model but without the final linear, pooling, batchnorm, and sigmoid layers.
+    # Put all beginning layers in an nn.Sequential . model_ft is now a torch model bt without the final linear, pooling, batchnorm, and sigmoid layers.
     model_ft = nn.Sequential(*list(model_ft.children())[:-5])
     for param in model_ft.parameters():
         param.requires_grad = False

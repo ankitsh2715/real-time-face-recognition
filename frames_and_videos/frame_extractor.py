@@ -1,4 +1,4 @@
-#Code reused from project developed for Mobile computing course
+# Code reused from project developed for Mobile computing course (Instructor - Dr. Ayan Banerjee) for ASL Fingerspelling project.
 
 import cv2
 import os

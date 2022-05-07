@@ -1,7 +1,7 @@
 import os
 import shutil
 
-person = "bharath_balaji"
+person = "ankit_sharma"
 
 all_frames = "./frames_and_videos/frames/"+person
 train_path = "./data/real_images/train/"+person+"/"
@@ -22,8 +22,8 @@ for file in video_files:
         shutil.copy(img_src_path, val_path)
 
         count += 1
-        #we need test images of 300 (20% of train dataset)
-        if count==300:
+        #we need test images of 50 (20% of train dataset)
+        if count==50:
             break
 
 print(person+" : Total files copied to val folder : "+str(count))
